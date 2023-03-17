@@ -1,0 +1,15 @@
+h1 {
+  background-color: red;
+}
+
+li {
+  color: blue;
+  padding: 10px;
+  border: 1px solid black;
+  transition: all linear 3s;
+}
+
+li:hover {
+  transform: scale(1.5) rotate(720deg);
+  background-color: blue;
+}
