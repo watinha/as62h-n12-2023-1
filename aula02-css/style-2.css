@@ -1,0 +1,32 @@
+.dainf {
+  font-size: 50px;
+  margin-right: 350px;
+}
+.chefia {
+  background-color: green;
+}
+.coordenadores {
+  background-color: blue;
+  font-style: italic;
+  text-decoration: underline;
+}
+.vermelho {
+  background-color: red;
+}
+.docentes {
+  background-color: blue;
+}
+.docentes div {
+  text-indent: -100px;
+}
+.documentos {
+  background-image: url('fundo.png');
+}
+.estrutura {
+  font-size: 40px;
+}
+.secretaria {
+  font-style: italic;
+  text-decoration: underline;
+  padding-left: 100px;
+}
