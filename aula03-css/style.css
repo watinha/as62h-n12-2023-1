@@ -1,0 +1,37 @@
+.vermelho {
+  background-color: red;
+  border: 3px dotted black;
+  height: 250px;
+  width: 250px;
+  margin: 0 auto;
+  padding: 25px;
+}
+.azul {
+  background-color: blue;
+  height: 200px;
+  width: 200px;
+  padding: 25px;
+}
+
+/* .verde {
+  background-color: green;
+  width: 100px;
+  height: 100px;
+  padding-top: 100px;
+  padding-left: 100px;
+}
+
+.amarelo {
+  background-color: yellow;
+  height: 100px;
+  width: 100px;
+} com padding--- */
+
+.amarelo {
+  background-color: yellow;
+  height: 100px;
+  width: 100px;
+
+  border-top: 100px solid green;
+  border-left: 100px solid green;
+}
