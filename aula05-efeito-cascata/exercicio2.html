@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type"
+              content="text/html; charset=utf-8"/>
+        <title>Exercício de Posicionamento</title>
+        <style type="text/css">
+            body {
+                margin: 0;
+            }
+            div,ul {
+                height: 100px;
+                width: 100%;
+                float: left;
+            }
+            .azul {
+                background-color: blue;
+            }
+            .vermelha {
+                background-color: red;
+                width: 20%;
+                height: 400px;
+            }
+            .verde {
+                background-color: green;
+                width: 60%;
+                height: 400px;
+                position: relative;
+            }
+            .laranja {
+                background-color: orange;
+                width: 20%;
+                height: 300px;
+            }
+            .amarelo {
+                background-color: yellow;
+            }
+            .cinza {
+                position: absolute;
+                top: 40%;
+                left: 35%;
+                width: 30%;
+                background-color: black;
+                height: 25%;
+            }
+            .container {
+                max-width: 900px;
+                height: auto;
+                margin: 0 auto;
+                float: none;
+            }
+            .menu li {
+                display: inline-block;
+                background-color: #BBBBBB;
+                text-indent: 0;
+                width: 15%;
+                position: relative;
+            }
+            .menu li a {
+                text-align: center;
+                color: blue;
+                display: inline-block;
+                text-indent: 0;
+                width: 100%;
+                padding: 1em 0;
+            }
+            .menu li a:hover {
+                background-color: #EEEEEE;
+            }
+            .menu {
+                z-index: 1;
+                width: 100%;
+                position: relative;
+                padding: 0;
+                margin: 0;
+                height: 3.1em;
+                text-indent: 1em;
+                background-color: #999999;
+                text-align: left;
+            }
+            .menu li .submenu {
+                display: block;
+                -webkit-transition: all linear 0.1s;
+                -moz-transition: all linear 0.1s;
+                transition: all linear 0.1s;
+
+                opacity: 0;
+                -webkit-transform: scale(0) translateY(-100px);
+                -moz-transform: scale(0.1) translateY(-100px);
+                transform: scale(0.1) translateY(-100px);
+            }
+            .menu li:hover .submenu {
+                opacity: 0.9;
+                -webkit-transform: scale(1) translateY(0px);
+                -moz-transform: scale(1) translateY(0px);
+                transform: scale(1) translateY(0px);
+            }
+            .submenu {
+                position: absolute;
+                top: 100%;
+                right: 0%;
+            }
+            .submenu li {
+                display: block;
+                width: 100%;
+                background-color: #DDDDDD;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="azul"></div>
+            <ul class="menu">
+                <li><a href="http://www.utfpr.edu.br">utfpr</a>
+                    <ul class="submenu">
+                        <li><a href="">abobrinha</a></li>
+                        <li><a href="">abacate</a></li>
+                        <li><a href="">mamao</a></li>
+                    </ul>
+                </li>
+                <li><a href="http://www.dainf.pg.utfpr.edu.br">dainf</a>
+                    <ul class="submenu">
+                        <li><a href="">abobrinha</a></li>
+                        <li><a href="">abacate</a></li>
+                        <li><a href="">mamao</a></li>
+                    </ul>
+                </li>
+                <li><a href="http://www.wikipedia.org">wikipedia</a>
+                    <ul class="submenu">
+                        <li><a href="">abobrinha</a></li>
+                        <li><a href="">abacate</a></li>
+                        <li><a href="">mamao</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="vermelha"></div>
+            <div class="verde">
+                <div class="cinza"></div>
+            </div>
+            <div class="laranja"></div>
+            <div class="amarelo"></div>
+        </div>
+    </body>
+</html>
