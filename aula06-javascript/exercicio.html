@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Introdução ao JavaScript</title>
+    <style type="text/css" media="all">
+      .impar { background-color: cyan; }
+    </style>
+  </head>
+  <body>
+    <h1>Exercício de JavaScript</h1>
+    <script type="text/javascript" charset="utf-8">
+      var entrada = prompt('Insira uma data no formato (DD/MM/YYYY)'),
+          meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+                   'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+                   'Novembro', 'Dezembro'],
+          vetor = entrada.split('/'),
+          dia = vetor[0],
+          mes = parseInt(vetor[1]),
+          ano = vetor[2];
+
+      document.write('<ul>');
+      document.write('  <li>Dia:' + dia + '</li>');
+      document.write('  <li>Mês:' + meses[mes-1] + '</li>');
+      document.write('  <li>Ano:' + ano + '</li>');
+      document.write('</ul>');
+
+      for (var i = 0; i < meses.length; i ++) {
+        var ind = ((mes - 1) + i) % 12;
+        if (ind % 2 === 1)
+          document.write('<p class="impar">' + meses[ind] + '</p>');
+        else
+          document.write('<p>' + meses[ind] + '</p>');
+      }
+    </script>
+  </body>
+</html>
