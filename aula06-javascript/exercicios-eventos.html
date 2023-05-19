@@ -23,30 +23,91 @@
       <p><span>Exercício 1:</span> Alterar a cor do div apresentado a seguir, quando o próximo botão "click1" for pressionado.</p>
       <button>click1</button>
       <div>COR?</div>
+
+      <script type="text/javascript" charset="utf-8">
+        var button = document.querySelector('button'),
+            div = document.querySelector('div');
+
+        button.addEventListener('click', function () {
+          div.style.backgroundColor = 'red';
+          div.style.padding = '50px';
+          div.style.transform = 'rotate(360deg)';
+        });
+      </script>
+
       <hr />
 
       <p><span>Exercício 2:</span> Apresentar/esconder o div apresentado a seguir, conforme o usuário pressionar o botão "click2".</p>
-      <button>click2</button>
-      <div class="escondido" style="background-color: yellow; height: 50px;">Conteúdo secreto, escondido</div>
+      <button id="b2">click2</button>
+      <div id="d2" class="escondido" style="background-color: yellow; height: 50px;">Conteúdo secreto, escondido</div>
+
+      <script type="text/javascript" charset="utf-8">
+        var button2 = document.querySelector('#b2'),
+            div2 = document.querySelector('#d2');
+
+        button2.addEventListener('click', function () {
+          div2.classList.toggle('escondido');
+        });
+      </script>
       <hr />
 
       <p><span>Exercício 3:</span> Mover o div apresentado a seguir para a direita/esquerda, toda vez que o botão "click3" for clicado (utilizar o style.transform).</p>
-      <button>click3</button>
-      <div style="height: 50px; width: 50px; background-color: red; transform: translateX(0);"></div>
+      <button id="b3">click3</button>
+      <div id="d3" style="height: 50px; width: 50px; background-color: red; transform: translateX(0);"></div>
+      <script type="text/javascript" charset="utf-8">
+        var b3 = document.querySelector('#b3'),
+            d3 = document.querySelector('#d3'),
+            count = 0;
+        b3.addEventListener('click', function () {
+          count += 10;
+          d3.style.transform = `translateX(${count}px)`;
+        });
+      </script>
       <hr />
 
       <p><span>Exercício 4:</span> Alterar o conteúdo textual e apresentação do botão "click4", toda vez que ele for clicado.</p>
-      <button>click4</button>
+      <button id="b4">click4</button>
+      <script type="text/javascript" charset="utf-8">
+        var b4 = document.querySelector('#b4');
+        b4.addEventListener('click', function () {
+          this.innerHTML = 'clicked';
+        });
+      </script>
+
       <hr />
 
       <p><span>Exercício 5:</span> Acrescentar um elemento li com o texto "qualquer ítem" no elemento ul a seguir, toda vez que o botão "click5" for pressionado.</p>
-      <button>click5</button>
-      <ul></ul>
+      <button id="b5">click5</button>
+      <ul id="u5"></ul>
+
+      <script type="text/javascript" charset="utf-8">
+        var b5 = document.querySelector('#b5'),
+            u5 = document.querySelector('#u5');
+        b5.addEventListener('click', function () {
+          var li = document.createElement('li');
+          li.innerHTML = 'qualquer ítem';
+          u5.appendChild(li);
+
+          //var li = '<li>qualquer ítem</li>';
+          //u5.innerHTML += li;
+        });
+      </script>
       <hr />
 
       <p><span>Exercício 6</span>: Acrescentar um elemento li com o texto "item X" no elemento ul a seguir (sendo X, o índice do elemento no ul), toda vez que o botão "click6" for pressionado.</p>
-      <button>click6</button>
-      <ul></ul>
+      <button id="b6">click6</button>
+      <ul id="u6"></ul>
+
+      <script type="text/javascript" charset="utf-8">
+        var b6 = document.querySelector('#b6'),
+            u6 = document.querySelector('#u6'),
+            count6 = 0;
+
+        b6.addEventListener('click', function () {
+          count6++;
+          u6.innerHTML += `<li>item ${count6}</li>`;
+        });
+      </script>
     </section>
 
     <section>
@@ -54,36 +115,93 @@
       <p><span>Exercício 7:</span> Apresentar o conteúdo do input a seguir (utilizando um alert), toda vez que o botão "click7" for pressionado.</p>
       <fieldset>
         <legend>Exercício 7</legend>
-        <input type="text" value="" />
-        <button>click7</button>
+        <input id="i7" type="text" value="" />
+        <button id="b7">click7</button>
       </fieldset>
+
+      <script type="text/javascript" charset="utf-8">
+        var i7 = document.querySelector('#i7'),
+            b7 = document.querySelector('#b7');
+        b7.addEventListener('click', function () {
+          alert(i7.value);
+        });
+      </script>
 
       <p><span>Exercício 8:</span> Inserir o conteúdo do input a seguir em um elemento li e depois acrescenta-lo no elemento ul apresentado a seguir, toda vez que o botão "click8" for pressionado.</p>
       <fieldset>
         <legend>Exercício 8</legend>
-        <input type="text" value="" />
-        <button>click8</button>
-        <ul></ul>
+        <input id="i8" type="text" value="" />
+        <button id="b8">click8</button>
+        <ul id="u8"></ul>
       </fieldset>
+      <script type="text/javascript" charset="utf-8">
+        function $(selector) {
+          return document.querySelector(selector);
+        }
+
+        var i8 = $('#i8'),
+            b8 = $('#b8'),
+            u8 = $('#u8');
+        b8.addEventListener('click', function () {
+          var li = document.createElement('li');
+          li.innerHTML = i8.value;
+          u8.appendChild(li);
+          i8.value = '';
+          i8.focus();
+        });
+      </script>
 
       <p><span>Exercício 9:</span> Inserir o conteúdo do input a seguir dentro do elemento div a seguir, toda vez que o conteúdo do input for alterado (utilizar o evento change/keyup).</p>
       <fieldset>
         <legend>Exercício 9</legend>
         <div>
-          <input type="text" value="" />
-          <div style="height: 25px; width: 50%; background-color: cyan"></div>
+          <input id="i9" type="text" value="" />
+          <div id="d9" style="height: 25px; width: 50%; background-color: cyan"></div>
         </div>
       </fieldset>
+
+      <script type="text/javascript" charset="utf-8">
+        var i9 = $('#i9'),
+            d9 = $('#d9');
+        i9.addEventListener('keyup', function () {
+          d9.innerHTML = i9.value;
+        });
+      </script>
 
       <p><span>Exercício 10:</span> Capturar quando as teclas de seta para baixo/cima/esquerda/direita foram pressionadas, e alterar o posicionamento do div de classe cursor (utilizar o parâmetro evento e o atributo keyCode). É possível fazer sem o input? (Dica: evento focus, tabindex)</p>
       <fieldset>
         <legend>Exercício 10</legend>
-        <input type="text" value="" />
+        <input id="i10" type="text" value="" />
         <div style="position: relative; border: 1px solid black; margin: 10px; height: 100px;">
-          <div class="cursor" style="top: 40px; left: 45%"></div>
+          <div id="d10" class="cursor" style="top: 40px; left: 45%"></div>
         </div>
       </fieldset>
+      <script type="text/javascript" charset="utf-8">
+        var i10 = $('#i10'),
+            d10 = $('#d10'),
+            esquerda = 37,
+            cima = 38,
+            direita = 39,
+            baixo = 40,
+            pos_x = 0,
+            pos_y = 0;
 
+        i10.addEventListener('keydown', function (ev) {
+          if (ev.keyCode === esquerda) {
+            pos_x -= 10;
+          }
+          else if (ev.keyCode === direita) {
+            pos_x += 10;
+          }
+          else if (ev.keyCode === cima) {
+            pos_y -= 10;
+          }
+          else if (ev.keyCode === baixo) {
+            pos_y += 10;
+          }
+          d10.style.transform = `translateX(${pos_x}px) translateY(${pos_y}px)`;
+        });
+      </script>
     </section>
 
   </body>
