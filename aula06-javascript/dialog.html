@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>TodoList com JavaScript</title>
+    </head>
+    <body>
+        <h1>Sistema de gerenciamento de tarefas</h1>
+        <button>clique aqui ver as tarefas</button>
+        <div style="top:25%;left:25%" class="dialog sumido">
+            <h2>Todo List</h2>
+            <fieldset id="cadastro">
+                <legend>Cadastro</legend>
+                <div class="new_todo">
+                    <label for="new_todo">Nova tarefa:</label>
+                    <input type="text" name="new_todo" value="" id="new_todo" />
+                    <span class="mensagem new_todo confirmacao"></span>
+                    <span class="mensagem new_todo erro"></span>
+                </div>
+                <div id="container"></div>
+            </fieldset>
+            <button>fechar</button>
+        </div>
+        <div class="overlay sumido"></div>
+        <style type="text/css" media="screen">
+            .erro {
+                color: red;
+            }
+            .confirmacao {
+                color: green;
+            }
+            .dialog label,
+            .dialog input,
+            .dialog .mensagem {
+                display: block;
+                float: left;
+                width: 30%;
+            }
+            .dialog label,
+            .dialog .mensagem {
+                padding: 2px;
+            }
+            .dialog .mensagem {
+                text-indent: 5px;
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                -webkit-transform: scale(0);
+                   -moz-transform: scale(0);
+                        transform: scale(0);
+
+                -webkit-transition: transform linear 0.3s;
+                   -moz-transition: transform linear 0.3s;
+                        transition: transform linear 0.3s;
+            }
+            .dialog .confirmacao .confirmacao,
+            .dialog .erro .erro {
+                width: 35%;
+                height: auto;
+                -webkit-transform: scale(1);
+                   -moz-transform: scale(1);
+                        transform: scale(1);
+            }
+            .dialog div {
+                clear: both;
+            }
+            .overlay {
+                position: fixed; width: 100%; height: 100%;
+                background-color: black; top: 0; left: 0;
+                opacity: 0.70;
+
+                -webkit-transition: height ease-in 0.3s;
+                   -moz-transition: height ease-in 0.3s;
+                        transition: height ease-in 0.3s;
+            }
+            .dialog {
+                position: fixed; z-index: 1; width: 50%;
+                height: 50%; background-color: white;
+                overflow: hidden;
+                padding: 0 10px 10px;
+
+                box-shadow: 3px 3px 3px #666;
+
+                -webkit-transition: height linear 0.3s;
+                   -moz-transition: height linear 0.3s;
+                        transition: height linear 0.3s;
+            }
+            .dialog.sumido{
+                height: 0;
+                padding: 0;
+
+                -webkit-transition: height linear 0.3s;
+                   -moz-transition: height linear 0.3s;
+                        transition: height linear 0.3s;
+            }
+            .overlay.sumido {
+                height: 0;
+            }
+            #container .todo.sumido {
+                max-height: 0;
+            }
+            .dialog button {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+            }
+            #container {
+                padding-top: 10px;
+                width: 70%;
+                margin: 0 auto;
+            }
+            #container .todo {
+                overflow: hidden;
+                max-height: 100px;
+                font-size: 19px;
+                -webkit-transition: max-height linear 0.3s;
+                   -moz-transition: max-height linear 0.3s;
+                        transition: max-height linear 0.3s;
+            }
+            #container .todo input {
+                height: 19px;
+                width: 19px;
+            }
+            #container .todo input,
+            #container .todo label {
+                width: auto;
+            }
+            #container .todo.checked label {
+                opacity: 0.7;
+                text-decoration: line-through;
+            }
+        </style>
+        <script type="text/javascript" charset="utf-8">
+            var botao_apresentar = document.querySelector("body  button"),
+                botao_sumir = document.querySelector(".dialog button"),
+                overlay = document.querySelector(".overlay"),
+                dialog = document.querySelector(".dialog");
+            botao_apresentar.addEventListener("click", function () {
+                dialog.className = "dialog";
+                overlay.className = "overlay";
+            });
+            botao_sumir.addEventListener("click", function () {
+                dialog.className = "dialog sumido";
+                overlay.className = "overlay sumido";
+            });
+            (function () {
+                var draggable = false,
+                    dialogX = (window.screen.availWidth / 4),
+                    dialogY = (window.screen.availHeight / 4),
+                    mouse_distanceX, mouse_distanceY;
+                dialog.addEventListener("mousedown", function (ev) {
+                    draggable = true;
+                    mouse_distanceX = ev.screenX - dialogX;
+                    mouse_distanceY = ev.screenY - dialogY;
+                });
+                dialog.addEventListener("mouseup", function (ev) {
+                    draggable = false;
+                });
+                dialog.addEventListener("mouseout", function (ev) {
+                    draggable = false;
+                });
+                dialog.addEventListener("mousemove", function (ev) {
+                    if (draggable) {
+                        var moveX = (ev.screenX - mouse_distanceX),
+                            moveY = (ev.screenY - mouse_distanceY);
+                        dialog.style.left = moveX + "px";
+                        dialog.style.top =  moveY + "px";
+                        dialogX = moveX;
+                        dialogY = moveY;
+                    }
+                });
+            }());
+
+            var erro_new_todo = document.querySelector(".new_todo.mensagem.erro"),
+                confirmacao_new_todo = document.querySelector(".new_todo.mensagem.confirmacao"),
+                div_new_todo = document.querySelector("div.new_todo"),
+                todo_container = document.querySelector("#container"),
+                todo_index = 1, timer;
+            document.querySelector("#new_todo").addEventListener("keyup", function (ev) {
+                var event = window.event || ev,
+                    self = this;
+                if (self.value.length < 3) {
+                    erro_new_todo.innerHTML = "não pode ser vazio...";
+                    div_new_todo.classList.add("erro");
+                    div_new_todo.classList.remove("confirmacao");
+                } else {
+                    confirmacao_new_todo.innerHTML = "OK!";
+                    div_new_todo.classList.remove("erro");
+                    div_new_todo.classList.add("confirmacao");
+
+                    if (event.keyCode === 13) {
+                        clearTimeout(timer);
+                        timer = setTimeout(function () {
+                            var todo_div = document.createElement("div"),
+                                checkbox = document.createElement("input"),
+                                label = document.createElement("label"),
+                                checked = false, todo_timer;
+
+                            todo_div.className = "todo";
+                            checkbox.value = self.value;
+                            checkbox.type = "checkbox";
+                            checkbox.name = "checkbox_" + todo_index;
+                            checkbox.id = "checkbox_" + todo_index;
+                            label.setAttribute("for", "checkbox_" + todo_index);
+                            label.innerHTML = self.value;
+
+                            todo_div.addEventListener("click", function () {
+                                clearTimeout(todo_timer);
+                                if (checkbox.checked) {
+                                    todo_div.className = "todo checked";
+                                    todo_timer = setTimeout(function () {
+                                        todo_div.className = "todo checked sumido";
+                                    }, 3000);
+                                } else {
+                                    todo_div.className = "todo";
+                                }
+                            });
+
+                            todo_div.appendChild(checkbox);
+                            todo_div.appendChild(label);
+                            todo_container.appendChild(todo_div);
+                            self.value = "";
+                            todo_index++;
+                        }, 300);
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
